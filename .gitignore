@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Data files (large files - we'll upload preprocessed data separately)
+*.rds
+*.csv.gz
+*.parquet
+
+# Model files
+*.h5
+*.pkl
+*.joblib
+*.model
+catboost_info/
+
+# Output files (but allow outputs/ directory)
+*.png
+*.jpg
+*.pdf
+*.html
+!outputs/**/*.png
+!outputs/**/*.jpg
+!outputs/**/*.pdf
+!outputs/*.csv
+
+# Quarto outputs (don't commit rendered files except presentation)
+/*_files/
+*.tex
+Team_Guide.pdf
+HDL_Prediction_Notebook.html
+!presentation/hdl_prediction_presentation.html
+!presentation/*_files/
+
+# Logs
+*.log
+!notebook_execution.log
+
+# Environment variables
+.env
+
+# Claude
+.claude/
+Team_Guide.qmd

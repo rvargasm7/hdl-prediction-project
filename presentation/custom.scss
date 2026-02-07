@@ -1,0 +1,27 @@
+/*-- scss:defaults --*/
+$body-bg: #ffffff;
+$body-color: #333333;
+$link-color: #0066cc;
+$presentation-heading-color: #003366;
+
+/*-- scss:rules --*/
+.reveal h1 {
+  color: #003366;
+  font-weight: bold;
+}
+
+.reveal h2 {
+  color: #0066cc;
+}
+
+.reveal .callout-important {
+  border-left-color: #dc3545;
+}
+
+.reveal .callout-note {
+  border-left-color: #0066cc;
+}
+
+.reveal .callout-warning {
+  border-left-color: #ffc107;
+}

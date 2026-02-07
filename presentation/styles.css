@@ -1,0 +1,23 @@
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal ul, .reveal ol {
+  margin-left: 1em;
+}
+
+.reveal img {
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.reveal table {
+  font-size: 0.8em;
+}
+
+.reveal code {
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
