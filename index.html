@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDL Cholesterol Prediction - MAS 635 Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fafafa;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .team {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #444;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style: disc;
+            margin-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .emoji {
+            font-size: 1.3rem;
+        }
+
+        .description {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #0066cc;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badges {
+            margin-bottom: 30px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>HDL Cholesterol Prediction</h1>
+    <p class="subtitle">Predicting HDL Cholesterol using Machine Learning & Deep Learning</p>
+    <p class="team">Rolando Vargas, Eleniz Espina, Bryce Leister | University of Miami | MAS 635</p>
+
+    <div class="badges">
+        <span class="badge">Machine Learning</span>
+        <span class="badge">Deep Learning</span>
+        <span class="badge">Healthcare</span>
+        <span class="badge">Python</span>
+        <span class="badge">Quarto</span>
+    </div>
+
+    <p class="description">
+        This project predicts HDL (High-Density Lipoprotein) cholesterol levels using demographic,
+        dietary, behavioral, and body measurement variables from the NHANES dataset. We implement
+        and compare 7 baseline ML models and 2 deep learning architectures.
+    </p>
+
+    <div class="section">
+        <h2><span class="emoji">📊</span> Presentation</h2>
+        <hr>
+
+        <h3>HDL Cholesterol Prediction</h3>
+        <ul>
+            <li><a href="presentation/hdl_prediction_presentation.html">Project Presentation Slides</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2><span class="emoji">📓</span> Notebooks</h2>
+        <hr>
+
+        <h3>Analysis Notebooks</h3>
+        <ul>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/blob/main/HDL_Cholesterol_Prediction.ipynb">HDL Prediction - Jupyter Notebook</a></li>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/blob/main/HDL_Prediction_Notebook.qmd">HDL Prediction - Quarto Notebook</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2><span class="emoji">📁</span> Data</h2>
+        <hr>
+
+        <h3>Dataset</h3>
+        <ul>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/tree/main/data">Preprocessed Data (GitHub)</a></li>
+            <li><a href="https://luminwin.github.io/ASASF/train.rds">Raw Training Data (ASASF)</a></li>
+            <li><a href="https://luminwin.github.io/ASASF/test.rds">Raw Test Data (ASASF)</a></li>
+        </ul>
+
+        <h3>Outputs</h3>
+        <ul>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/blob/main/outputs/pred.csv">Final Predictions (pred.csv)</a></li>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/tree/main/outputs/figures">Visualizations</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2><span class="emoji">📚</span> Documentation</h2>
+        <hr>
+
+        <h3>Project Resources</h3>
+        <ul>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project">GitHub Repository</a></li>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/blob/main/README.md">README Documentation</a></li>
+            <li><a href="https://github.com/rvargasm7/hdl-prediction-project/blob/main/requirements.txt">Requirements</a></li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>MAS 635 - Machine Learning Methods | University of Miami | Spring 2026</p>
+        <p><a href="https://github.com/rvargasm7/hdl-prediction-project">View on GitHub</a></p>
+    </footer>
+</body>
+</html>

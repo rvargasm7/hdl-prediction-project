@@ -70,6 +70,7 @@ catboost_info/
 Team_Guide.pdf
 HDL_Prediction_Notebook.html
 !presentation/hdl_prediction_presentation.html
+!index.html
 !presentation/*_files/
 
 # Logs
