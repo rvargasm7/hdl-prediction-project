@@ -34,10 +34,10 @@ format:
 ::: {.column width="50%"}
 **Key Stats**:
 
-- 7,000+ training samples
-- 100+ features
+- 1,000 training samples
+- 95 features
 - 7 baseline + 2 DL models
-- Ensemble predictions
+- Stacking ensemble predictions
 :::
 
 ::::
@@ -59,13 +59,13 @@ Introduce the project and its importance for cardiovascular health prediction
 - **Predictive Value**: Early identification enables intervention
 :::
 
-## Dataset: NHANES
+## Dataset: ASA South Florida Data Challenge
 
-**National Health and Nutrition Examination Survey**
+**National Health and Nutrition Examination Survey (NHANES)**
 
-- **Source**: CDC - Representative US population sample
+- **Source**: ASA South Florida Student Data Challenge
 - **Features**: Demographics, body measurements, diet, lab values
-- **Size**: ~7,000 training, ~3,000 test samples
+- **Size**: 1,000 training, 200 test samples
 - **Target**: `LBDHDD_outcome` - Direct HDL cholesterol (mg/dL)
 
 **Normal Ranges**:
@@ -92,8 +92,8 @@ Introduce the project and its importance for cardiovascular health prediction
 **Key Observations**:
 
 - Approximately normal distribution
-- Mean: ~52 mg/dL
-- Slight right skew
+- Mean: 54.73 mg/dL, Std: 9.01 mg/dL
+- Slight right skew (0.376)
 
 ## Feature Correlations
 
@@ -186,7 +186,7 @@ Introduce the project and its importance for cardiovascular health prediction
 
 ```python
 # Standard Tabular Neural Network
-Input (100+ features)
+Input (95 features)
     ↓
 Dense(256) → BatchNorm → ReLU → Dropout(0.3)
     ↓
@@ -216,6 +216,7 @@ Output (1) - HDL prediction
 - **Epochs**: Up to 200 (with early stopping)
 - **Batch Size**: 32
 - **Cross-Validation**: 5-fold CV for top models
+- **Hyperparameter Tuning**: Optuna (automated Bayesian search)
 :::
 
 # Results
@@ -238,32 +239,46 @@ Output (1) - HDL prediction
 
 | Model | RMSE ↓ | MAE ↓ | R² ↑ |
 |-------|--------|-------|------|
-| XGBoost | **Best** | **Best** | **Best** |
-| CatBoost | 2nd | 2nd | 2nd |
-| Random Forest | 3rd | 3rd | 3rd |
-| Neural Network | Competitive | Competitive | Competitive |
-| Gradient Boosting | Good | Good | Good |
-| Linear Models | Baseline | Baseline | Baseline |
+| Gradient Boosting | 5.0312 | 3.9438 | 0.6963 |
+| CatBoost | 5.0388 | 3.9370 | 0.6954 |
+| XGBoost | 5.1887 | 4.1054 | 0.6770 |
+| Elastic Net | 5.8996 | 4.6086 | 0.5825 |
+| Basic NN | 6.5471 | 5.1350 | 0.4858 |
+| Advanced NN | 7.3001 | 5.8338 | 0.3607 |
 
 ::: {.callout-note}
-**Final Approach**: Weighted ensemble combining top 4 models
+**Final Approach**: Stacking ensemble with Optuna-tuned models and Ridge meta-learner
 :::
 
-## Ensemble Strategy
+## Stacking Ensemble Strategy
 
-**Weighted Ensemble Composition**:
+**Approach**: Out-of-fold stacking with Ridge meta-learner
 
-- XGBoost: **35%**
-- CatBoost: **35%**
-- Random Forest: **20%**
-- Neural Network: **10%**
+:::: {.columns}
 
-**Rationale**:
+::: {.column width="50%"}
+**Base Models**:
 
-- Combines strengths of different algorithms
-- Reduces variance
-- More robust predictions
-- Better generalization
+- CatBoost (Optuna-tuned)
+- XGBoost (Optuna-tuned)
+- Gradient Boosting
+- Random Forest
+:::
+
+::: {.column width="50%"}
+**Stacking OOF RMSE**:
+
+| Model | OOF RMSE |
+|-------|----------|
+| XGBoost | 4.7031 |
+| CatBoost | 4.7318 |
+| GradBoost | 4.8308 |
+| **Stacked** | **4.6434** |
+:::
+
+::::
+
+**Why Stacking?**: Meta-learner finds optimal model combination, achieving 1.27% improvement over best single model
 
 ## Prediction Distribution
 
@@ -297,10 +312,10 @@ Output (1) - HDL prediction
 **Modifiable Risk Factors**:
 
 ::: {.incremental}
-- ✅ **Body Mass Index** - Weight management interventions
-- ✅ **Waist Circumference** - Abdominal fat reduction
-- ✅ **Dietary Habits** - Nutrition counseling opportunities
-- ✅ **Physical Activity** - Exercise program recommendations
+- **Body Mass Index** - Weight management interventions
+- **Waist Circumference** - Abdominal fat reduction
+- **Dietary Habits** - Nutrition counseling opportunities
+- **Physical Activity** - Exercise program recommendations
 :::
 
 **Non-Modifiable Factors**:
@@ -380,11 +395,11 @@ Output (1) - HDL prediction
 ## Summary
 
 ::: {.incremental}
-- ✅ Successfully predicted HDL cholesterol using ML/DL
-- ✅ Ensemble approach achieved best performance
-- ✅ Identified key modifiable risk factors
-- ✅ Demonstrated clinical applicability
-- ✅ Provided actionable business insights
+- Successfully predicted HDL cholesterol using ML/DL
+- Stacking ensemble with Optuna tuning achieved best performance (OOF RMSE: 4.6434)
+- Identified key modifiable risk factors (BMI, waist, diet)
+- Demonstrated clinical applicability
+- Provided actionable business insights
 :::
 
 ## Key Takeaways
@@ -395,8 +410,8 @@ Output (1) - HDL prediction
 **Technical**:
 
 - Tree-based models excel on tabular data
-- Deep learning competitive with proper architecture
-- Ensemble methods improve robustness
+- Optuna hyperparameter tuning improved model performance
+- Stacking ensemble outperforms simple averaging
 :::
 
 ::: {.column width="50%"}
@@ -420,7 +435,7 @@ Output (1) - HDL prediction
 - Eleniz Espina
 - Bryce Leister
 
-**GitHub**: [github.com/rvargasm7/hdl_cholesterol_prediction](https://github.com/rvargasm7/hdl_cholesterol_prediction)
+**GitHub**: [github.com/rvargasm7/hdl-prediction-project](https://github.com/rvargasm7/hdl-prediction-project)
 :::
 
 ::: {.column width="40%"}
@@ -447,22 +462,25 @@ Thank audience, invite questions, provide contact information
 3. XGBoost, CatBoost Documentation - Model implementations
 4. TensorFlow/Keras - Deep learning framework
 5. Scikit-learn - ML preprocessing and baseline models
+6. Optuna - Hyperparameter optimization framework
 
 ## Technical Details
 
 **Computing Environment**:
 
-- Python 3.13
-- TensorFlow 2.15+
-- XGBoost 2.0+
-- 7,000+ training samples
-- 100+ features after encoding
+- Python 3.10+
+- TensorFlow 2.20+
+- XGBoost 3.1+
+- CatBoost 1.2+
+- Optuna (Bayesian hyperparameter tuning)
+- 1,000 training samples, 95 features
 
 **Training Time**:
 
-- Baseline models: ~5 minutes
-- Deep learning: ~10 minutes
-- Total pipeline: ~15 minutes
+- Baseline models: ~2 minutes
+- Deep learning: ~5 minutes
+- Optuna tuning: ~15 minutes
+- Stacking ensemble: ~5 minutes
 
 ## Data Dictionary (Sample)
 

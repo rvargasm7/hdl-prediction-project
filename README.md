@@ -20,9 +20,9 @@ This project predicts HDL (High-Density Lipoprotein) cholesterol levels using de
 
 ## Dataset
 - **Source**: [ASA South Florida Student Data Challenge](https://luminwin.github.io/ASASF/)
-- **Training samples**: ~7,000+ observations
-- **Test samples**: ~3,000+ observations
-- **Features**: 100+ variables including demographics, body measurements, dietary intake, and health indicators
+- **Training samples**: 1,000 observations
+- **Test samples**: 200 observations
+- **Features**: 95 variables including demographics, body measurements, dietary intake, and health indicators
 
 ## Data Access
 
@@ -132,21 +132,41 @@ jupyter notebook
 
 ## Results
 
-### Best Performing Models
+### Best Performing Models (Validation Set)
 | Model | Validation RMSE | Validation MAE | R² |
 |-------|----------------|----------------|-----|
-| XGBoost | TBD | TBD | TBD |
-| CatBoost | TBD | TBD | TBD |
-| Random Forest | TBD | TBD | TBD |
-| Neural Network | TBD | TBD | TBD |
+| Gradient Boosting | 5.0312 | 3.9438 | 0.6963 |
+| CatBoost | 5.0388 | 3.9370 | 0.6954 |
+| XGBoost | 5.1887 | 4.1054 | 0.6770 |
+| Elastic Net | 5.8996 | 4.6086 | 0.5825 |
+| Ridge Regression | 5.9012 | 4.5957 | 0.5822 |
+| Linear Regression | 5.9322 | 4.6188 | 0.5778 |
+| Random Forest | 6.2469 | 4.8718 | 0.5319 |
+| Basic Neural Network | 6.5471 | 5.1350 | 0.4858 |
+| Advanced Neural Network | 7.3001 | 5.8338 | 0.3607 |
 
-*Results will be updated after running the notebook*
+### Stacking Ensemble (Final Model)
+| Component | OOF RMSE |
+|-----------|----------|
+| XGBoost (Optuna-tuned) | 4.7031 |
+| CatBoost (Optuna-tuned) | 4.7318 |
+| Gradient Boosting | 4.8308 |
+| Random Forest | 5.8315 |
+| **Stacked (Ridge meta-learner)** | **4.6434** |
+
+### Cross-Validation RMSE (5-Fold)
+| Model | Mean RMSE | Std |
+|-------|-----------|-----|
+| XGBoost (Optuna) | 4.6978 | - |
+| CatBoost (Optuna) | 4.7277 | - |
+| CatBoost (default) | 4.8103 | ±0.1370 |
+| XGBoost (default) | 4.8477 | ±0.1587 |
 
 ### Key Findings
 1. Strong negative correlation between HDL and body measurements (BMI, waist circumference)
 2. Significant differences in HDL levels across demographic groups
-3. Ensemble approach provides robust predictions
-4. Deep learning models competitive with tree-based methods
+3. Optuna hyperparameter tuning improved CatBoost CV from 4.81 to 4.73 and XGBoost from 4.85 to 4.70
+4. Stacking ensemble with Ridge meta-learner achieved OOF RMSE of 4.6434, a 1.27% improvement over the best individual model
 
 ## Business Insights
 - **Healthcare Applications**: Predictive model can help identify individuals at risk for cardiovascular disease
