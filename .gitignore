@@ -42,7 +42,7 @@ env/
 .AppleDouble
 .LSOverride
 
-# Data files (large files - we'll upload preprocessed data separately)
+# Data files (raw/large)
 *.rds
 *.csv.gz
 *.parquet
@@ -54,32 +54,35 @@ env/
 *.model
 catboost_info/
 
-# Output files (but allow outputs/ directory)
-*.png
-*.jpg
+# Root-level generated files (notebook saves to outputs/ now)
+/*.png
+/*.jpg
+/*.csv
+/*.log
+
+# Outputs directory — only track figures and pred.csv
+!outputs/figures/*.png
+!outputs/pred.csv
+
+# Quarto rendered outputs
+*_files/
+*.tex
 *.pdf
 *.html
-!outputs/**/*.png
-!outputs/**/*.jpg
-!outputs/**/*.pdf
-!outputs/*.csv
 
-# Quarto outputs (don't commit rendered files except presentation)
-/*_files/
-*.tex
-Team_Guide.pdf
-HDL_Prediction_Notebook.html
-!presentation/hdl_prediction_presentation.html
+# Keep these specific HTML files
 !index.html
-!presentation/*_files/
 
-# Logs
-*.log
-!notebook_execution.log
+# Quarto source files we don't need tracked
+HDL_Prediction_Notebook.qmd
+Team_Guide.qmd
+Team_Guide.pdf
 
-# Environment variables
-.env
+# Assignment doc
+MAS651_Midterm_Project_2026*.docx
 
 # Claude
 .claude/
-Team_Guide.qmd
+
+# Logs
+*.log

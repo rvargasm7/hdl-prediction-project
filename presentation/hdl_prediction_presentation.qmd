@@ -17,6 +17,7 @@ format:
     background-transition: fade
     smaller: false
     scrollable: true
+    embed-resources: true
 ---
 
 ## Overview
