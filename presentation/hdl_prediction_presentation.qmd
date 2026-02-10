@@ -80,9 +80,9 @@ Introduce the project and its importance for cardiovascular health prediction
 ![](../outputs/figures/missingness_analysis.png){width="80%"}
 
 ::: {.notes}
-- Significant missingness in some features (>50%)
-- Imputation strategy needed
-- Most demographic and body measures complete
+- Dataset has 0% missing values across all 95 features
+- 100% data completeness — no imputation actually needed
+- SimpleImputer included in pipeline as a safety net
 :::
 
 ## Target Distribution
@@ -137,19 +137,19 @@ Introduce the project and its importance for cardiovascular health prediction
 
 ::: {.incremental}
 1. **Missing Value Imputation**
-   - Numeric: Median imputation
-   - Categorical: Most frequent value
+   - Strategy: Median imputation (safety net)
+   - Dataset has 0% missing values
 
 2. **Feature Scaling**
    - StandardScaler (mean=0, std=1)
-   - All numeric features normalized
+   - All 95 numeric features normalized
 
-3. **Encoding**
-   - One-hot encoding for categorical
-   - Handle unknown categories
+3. **Feature Types**
+   - All 95 features are numeric
+   - No categorical encoding needed
 
 4. **Train-Validation Split**
-   - 80% training / 20% validation
+   - 800 training (80%) / 200 validation (20%)
 :::
 
 ## Model Architecture
@@ -160,7 +160,7 @@ Introduce the project and its importance for cardiovascular health prediction
 **Baseline Models** (7):
 
 - Linear Regression
-- Ridge / Lasso
+- Ridge Regression
 - Elastic Net
 - Random Forest
 - Gradient Boosting
@@ -227,9 +227,9 @@ Output (1) - HDL prediction
 
 **Observations**:
 
-- Smooth convergence
-- No overfitting (validation tracks training)
-- Early stopping effective
+- Early stopping activated in both architectures
+- NNs underperformed tree-based models (RMSE 6.69–7.10 vs 5.03)
+- Small dataset (n=1,000) limits deep learning effectiveness
 
 ## Model Comparison
 
@@ -243,8 +243,8 @@ Output (1) - HDL prediction
 | CatBoost | 5.0388 | 3.9370 | 0.6954 |
 | XGBoost | 5.1887 | 4.1054 | 0.6770 |
 | Elastic Net | 5.8996 | 4.6086 | 0.5825 |
-| Basic NN | 6.5471 | 5.1350 | 0.4858 |
-| Advanced NN | 7.3001 | 5.8338 | 0.3607 |
+| Basic NN | 6.6930 | 5.2168 | 0.4626 |
+| Advanced NN | 7.0997 | 5.5689 | 0.3953 |
 
 ::: {.callout-note}
 **Final Approach**: Stacking ensemble with Optuna-tuned models and Ridge meta-learner
